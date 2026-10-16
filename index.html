@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desafío Puracé - Grado Décimo</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <canvas id="particlesCanvas"></canvas>
+
+    <div class="main-container">
+
+        <!-- PANTALLA DE INICIO -->
+        <section id="startScreen" class="screen active">
+            <div class="hero-badge">
+                <i class="fa-solid fa-volcano"></i> PARQUE NACIONAL NATURAL PURACÉ • CAUCA
+            </div>
+            
+            <h1 class="game-title">DESAFÍO PURACÉ</h1>
+            <p class="game-subtitle"><i class="fa-solid fa-award"></i> Edición Ilustrada - Grado Décimo</p>
+
+            <!-- CRÉDITOS ACADÉMICOS DESTACADOS -->
+            <div class="credits-card">
+                <div class="credits-header">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                    <span>FICHA DEL PROYECTO EDUCATIVO</span>
+                </div>
+                <div class="credits-grid">
+                    <div class="credit-item">
+                        <span class="label">Estudiante:</span>
+                        <span class="value highlight">Luis Alejandro</span>
+                    </div>
+                    <div class="credit-item">
+                        <span class="label">Institución:</span>
+                        <span class="value">I. E. Manuel María Mosquera</span>
+                    </div>
+                    <div class="credit-item">
+                        <span class="label">Asignatura:</span>
+                        <span class="value">Componente Inglés</span>
+                    </div>
+                    <div class="credit-item">
+                        <span class="label">Docente:</span>
+                        <span class="value">Álvaro Stid</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="instructions">
+                <p><i class="fa-solid fa-compass"></i> Explora el territorio de Puracé a través de preguntas ilustradas sobre vulcanología, ecosistemas de páramo, fauna nativa y conservación ambiental.</p>
+            </div>
+
+            <button id="btnStart" class="btn btn-primary pulse-btn">
+                <i class="fa-solid fa-play"></i> ¡INICIAR EXPEDICIÓN!
+            </button>
+        </section>
+
+        <!-- PANTALLA DE JUEGO -->
+        <section id="gameScreen" class="screen">
+            <!-- Barra de estado superior -->
+            <div class="game-header">
+                <div class="badge-info">
+                    <i class="fa-solid fa-layer-group"></i> 
+                    <span id="levelBadge">Nivel 1</span>
+                </div>
+                
+                <div class="badge-info lives-badge">
+                    <i class="fa-solid fa-heart heart-icon"></i> 
+                    <span id="livesCount">3</span>
+                </div>
+
+                <div class="badge-info score-badge">
+                    <i class="fa-solid fa-trophy star-icon"></i> 
+                    <span id="scoreCount">0</span> PTS
+                </div>
+            </div>
+
+            <!-- Barra de Progreso Neón -->
+            <div class="progress-bar-container">
+                <div id="progressBar" class="progress-bar"></div>
+            </div>
+
+            <!-- Tarjeta de Pregunta Colorida e Ilustrada -->
+            <div class="question-card" id="questionCard">
+                <div class="question-header">
+                    <span class="question-number" id="questionNumber">Nivel 1 • Pregunta 1 de 3</span>
+                    <span class="category-badge" id="categoryBadge">Vulcanología</span>
+                </div>
+
+                <!-- Banner Ilustrado de la Pregunta -->
+                <div class="question-media-card" id="mediaCard">
+                    <i id="mediaIcon" class="fa-solid fa-volcano media-icon"></i>
+                    <div class="media-title" id="mediaTitle">Cadena Volcánica de los Coconucos</div>
+                </div>
+
+                <h2 id="questionText" class="question-text">Cargando pregunta...</h2>
+
+                <div id="optionsContainer" class="options-container">
+                    <!-- Opciones generadas por JS -->
+                </div>
+
+                <!-- Pista Educativa -->
+                <div class="hint-box">
+                    <i class="fa-solid fa-lightbulb"></i>
+                    <span id="hintText">Pista pedagógica para orientar tu respuesta...</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- PANTALLA DE NIVEL COMPLETADO -->
+        <section id="levelCompleteScreen" class="screen">
+            <div class="icon-celebration">
+                <i class="fa-solid fa-circle-check"></i>
+            </div>
+            <h2>¡Nivel Completado!</h2>
+            <p id="levelCompleteText">¡Has superado con éxito los desafíos científicos de esta etapa!</p>
+            <button id="btnNextLevel" class="btn btn-primary">
+                Siguiente Nivel <i class="fa-solid fa-arrow-right"></i>
+            </button>
+        </section>
+
+        <!-- PANTALLA FINAL DE VICTORIA -->
+        <section id="victoryScreen" class="screen">
+            <div class="icon-celebration gold">
+                <i class="fa-solid fa-crown"></i>
+            </div>
+            <h2>¡GUARDIÁN DEL PÁRAMO!</h2>
+            <p>¡Felicitaciones! Has demostrado un nivel académico sobresaliente en el estudio del <strong>Parque Nacional Natural Puracé</strong>.</p>
+            
+            <div class="final-score-box">
+                <p>PUNTAJE FINAL</p>
+                <h1 id="finalScore">0</h1>
+                <p>PUNTOS OBTENIDOS</p>
+            </div>
+
+            <div class="credits-card mini">
+                <p><strong>Proyecto desarrollado por:</strong> Luis Alejandro</p>
+                <p>Grado Décimo • I.E. Manuel María Mosquera</p>
+                <p><strong>Docente:</strong> Álvaro Stid</p>
+            </div>
+
+            <button id="btnRestart" class="btn btn-secondary">
+                <i class="fa-solid fa-rotate-right"></i> Volver a Jugar
+            </button>
+        </section>
+
+        <!-- PANTALLA DE GAME OVER -->
+        <section id="gameOverScreen" class="screen">
+            <div class="icon-celebration danger">
+                <i class="fa-solid fa-heart-crack"></i>
+            </div>
+            <h2>EXPEDICIÓN INTERRUMPIDA</h2>
+            <p>Te has quedado sin vidas. ¡Repasa los temas ecológicos de Puracé e inténtalo de nuevo!</p>
+            
+            <button id="btnRetry" class="btn btn-primary">
+                <i class="fa-solid fa-arrows-rotate"></i> Intentar de Nuevo
+            </button>
+        </section>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
